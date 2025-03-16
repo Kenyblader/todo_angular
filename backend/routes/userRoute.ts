@@ -5,7 +5,7 @@ import { addUser, getAllUsers, getUserById, updateUser } from "../controllers/us
 
 userRouter.post('/users',addUser);
 userRouter.get('/users',getAllUsers);
-userRouter.get('users/:id',getUserById);
-userRouter.put('users/:id',updateUser);
+userRouter.get('/users/:id',getUserById);
+userRouter.put('/users/:id',updateUser);
 
 export default userRouter

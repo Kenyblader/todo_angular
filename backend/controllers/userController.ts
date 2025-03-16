@@ -26,9 +26,11 @@ export const getUserById=async (req:Request,res:Response)=>{
     try{
         const {id}=await req.body;
         const user=await User.findByPk(id);
+        console.log({id},id)
         if(!user)
             res.json({error:'user non trouve'});
-        res.json(user)
+        else
+            res.json(user)
     }catch(e:any){
         res.status(500).json({error:e.message})
     }
