@@ -14,7 +14,8 @@ export default class Task extends Model{
     private reelEndDate?:Date;
     private status!:TASK_STATUS;
     private img?:Blob;
-    private idUser?:number
+    private idUser?:number;
+    private idProject!:number;
 }
 
 Task.init({
@@ -45,7 +46,7 @@ Task.init({
     },
     img:{
         type:DataTypes.BLOB,
-        allowNull:false
+        allowNull:true
     },
 },{sequelize,modelName:'Task'});
 

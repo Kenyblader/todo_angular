@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import User from '../models/user';
 import { error } from 'console';
+import Project from '../models/projet';
 
 export const addUser=async(req:Request,res:Response)=>{
     try{
@@ -24,7 +25,7 @@ export const getAllUsers=async(req:Request,res:Response)=>{
 
 export const getUserById=async (req:Request,res:Response)=>{
     try{
-        const {id}=await req.body;
+        const {id}=await req.params;
         const user=await User.findByPk(id);
         console.log({id},id)
         if(!user)
@@ -36,6 +37,25 @@ export const getUserById=async (req:Request,res:Response)=>{
     }
 }
 
+export const getProjectByUser=async (req:Request,res:Response)=>{
+    try {
+        const {id}=await req.params;
+        const projects=await Project.findAll({
+            where:{idCreator:id}
+        })
+        
+        if(!projects)
+            res.status(404).json({error:'user non trouve'})
+        else
+            res.json(projects)
+        
+        
+            
+    } catch (error) {
+        
+    }
+}
+
 export const updateUser = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -43,8 +63,8 @@ export const updateUser = async (req: Request, res: Response) => {
       const [updated] = await User.update({ mail, password }, { where: { id } });
   
       if (updated) {
-        const updatedTodo = await User.findByPk(id);
-        res.json(updatedTodo);
+        const updatedUser = await User.findByPk(id);
+        res.json(updatedUser);
       } else {
         res.status(404).json({ error: "User non trouvé" });
       }

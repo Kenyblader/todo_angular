@@ -32,7 +32,7 @@ Subtask.init({
     },
     reelEndDate:{
         type:DataTypes.DATE,
-        allowNull:true
+        allowNull:true,
     },
     status:{
         type:DataTypes.STRING,

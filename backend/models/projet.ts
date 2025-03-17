@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
+import Task from "./task";
 
 
 export default class Project extends Model{
@@ -19,4 +20,14 @@ Project.init({
         allowNull:false
     }
 },{sequelize,modelName:'Projets'})
+
+Project.hasMany(Task,{
+    foreignKey:'idProject',
+    as:'projectTask'
+});
+
+Task.belongsTo(Project,{
+    foreignKey:'idProject',
+    as:'taskProject'
+})
 

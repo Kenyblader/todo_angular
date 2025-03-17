@@ -4,9 +4,12 @@ import Project from "./projet";
 import Task from "./task";
 
 export default class User extends Model{
+   
     private mail!:string;
     private password!:string;
     private id!:number;
+
+    // public readonly userP?:Project[];
     
 }
 
