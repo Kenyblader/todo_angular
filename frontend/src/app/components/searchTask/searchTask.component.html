@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="search-form">
+      <h1>Mes Tâches</h1>
+      <a class="addbtn" [routerLink]="['formtask']">Ajouter des Tâches</a>
+      <button class="addbtn" (click)="openSuggestionPanel()">Suggestion 🤖</button>
+    </div>
+  
+    <div class="search-form">
+      <label for="filterType">Filtrer par :</label>
+      <select [(ngModel)]="filterType">
+        <option value="name">Nom</option>
+        <option value="dateDebut">Date de début</option>
+        <option value="statut">Statut</option>
+      </select>
+  
+      <input type="text" [(ngModel)]="filterValue" placeholder="Entrez la valeur">
+      <button (click)="onSearch()">Rechercher</button>
+    </div>
+  
+    <table id="taskTable">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Date de début</th>
+          <th>Date de fin</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of filteredTasks">
+          <td>{{ task.name }}</td>
+          <td>{{ task.startDate| date }}</td>
+          <td>{{ task.endDate | date }}</td>
+          <td>{{ task.status }}</td>
+          <td>
+            <button class="edit-btn" (click)="editTask(task)" >✏️</button>
+            <button class="delete-btn" (click)="deleteTask(task.id)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

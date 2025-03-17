@@ -1,0 +1,17 @@
+<div class="project-list">
+  <h2>Mes Projets</h2>
+  <!-- <app-project-form (projectAdded)="addProject($event)"></app-project-form> -->
+   <button (click)="addProject()">ajouter un projet</button>
+  <ul>
+    <li *ngFor="let project of projects">
+      {{ project.name }}
+      <button (click)="editProject(project)">Modifier</button>
+      <button (click)="deleteProject(project.id)">Supprimer</button>
+      <button [routerLink]="['searchtask',project.id]">open</button>
+      <!-- <app-task-form [projectId]="project.id" (taskAdded)="addTask($event, project.id)"></app-task-form> -->
+      <ul>
+        <li *ngFor="let task of tasks">{{ task.task.name }} - {{ task.task.status }}</li>
+      </ul>
+    </li>
+  </ul>
+</div>
