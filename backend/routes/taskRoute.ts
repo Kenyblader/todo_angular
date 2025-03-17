@@ -5,7 +5,7 @@ const taskRoute=Router();
 taskRoute.post('/tasks',addTask);
 taskRoute.get('/tasks',getAllTask);
 taskRoute.get('/tasks/:id',getTaskById);
-taskRoute.get('/tasks/:id',getTaskByProject);
+taskRoute.get('/tasks/project/:id',getTaskByProject);
 taskRoute.put('/tasks/:id',updateTask);
 taskRoute.delete('/tasks/:id',deleteTask);
 

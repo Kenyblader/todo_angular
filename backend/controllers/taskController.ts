@@ -27,6 +27,8 @@ export const getTaskById=async(req:Request,res:Response)=>{
         const task=await Task.findByPk(id);
         if(!task)
             res.status(404).json({error:`task ${id} not found`})
+        else
+            res.json(task)
     } catch (error:any) {
         res.status(500).json({error:error.message})
     }
@@ -36,17 +38,21 @@ export const getTaskByProject=async(req:Request,res:Response)=>{
     try {
         const {id}=req.params;
         const tasks=await Task.findAll({where:{idProject:id}});
+        res.json(tasks)
     } catch (error:any) {
-        
+        res.status(500).json({error:error})
     }
 }
 
 export const updateTask=async(req:Request,res:Response)=>{
     try {
         const {id}=req.params;
-        const {name,startDate,endDate,status,idProject,img,reelEndDate,idUser}=req.body;
-        const updated=await Task.update({name,startDate,endDate,status,idProject,img,reelEndDate,idUser},{where:{id}});
-        res.json(updated)
+        const {name,startDate,endDate,status,idProject,reelEndDate,idUser}=req.body;
+        const updated=await Task.update({name,startDate,endDate,status,idProject,reelEndDate,idUser},{where:{id}});
+        if(!updated)
+            res.json({error:'echoue'});
+        else
+            res.json(updated)
     } catch (error:any) {
         res.status(500).json({error:error.message})
     }

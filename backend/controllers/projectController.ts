@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Project from "../models/projet";
 import { error } from "console";
+import User from "../models/user";
 
 export const addProject=async(req:Request,res:Response)=>{
     try {
@@ -23,6 +24,28 @@ export const getAllProjects=async(req:Request,res:Response)=>{
     }
 }
 
+export const getAllProjectsAssociateToUser=async(req:Request,res:Response)=>{
+    try {
+        const {id}=req.params;
+        await Project.findByPk(id,{
+            include:{
+                model:User,
+                through:{attributes:[]}
+            }
+        }).then(project=>{
+            if(!project)
+                res.status(404).json({error:`user ${id} non trouve`});
+            else
+            {
+                res.json(project)
+            }
+        })
+        
+    } catch (error:any) {
+        res.status(500).json({error:error.message})
+    }
+}
+
 export const getProjectById=async(req:Request,res:Response)=>{
     try {
         const {id}=req.params;
@@ -35,6 +58,7 @@ export const getProjectById=async(req:Request,res:Response)=>{
         res.status(500).json({error:error.message})
     }
 }
+
 
 export const updateProject=async(req:Request,res:Response)=>{
     try {

@@ -23,7 +23,7 @@ app.use('/api', geminiRoute);
 (async () => {
     try {
       await sequelize.authenticate();
-      await sequelize.sync({alter:true});
+      await sequelize.sync({force:true});
       console.log('✅ Connexion à SQLite réussie !');
       app.listen(PORT, () => {
         console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);

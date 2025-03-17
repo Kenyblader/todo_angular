@@ -1,15 +1,14 @@
-;import { DataTypes, Model } from "sequelize";
+;import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../config/database";
 import Project from "./projet";
 import Task from "./task";
 
 export default class User extends Model{
-   
     private mail!:string;
     private password!:string;
     private id!:number;
 
-    // public readonly userP?:Project[];
+    public readonly projects?:Project[];
     
 }
 
@@ -39,13 +38,9 @@ User.hasMany(Task,{
 })
 User.belongsToMany(Project,{
     through:'userProject',
-    as :'userP',
-    foreignKey:'idUser'
 })
 Project.belongsToMany(User,{
     through:'userProject',
-    as :'projectU',
-    foreignKey:'idProject'
 })
 Task.belongsTo(User,{
     foreignKey:'idUser',
